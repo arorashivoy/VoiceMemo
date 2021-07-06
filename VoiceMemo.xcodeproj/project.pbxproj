@@ -11,6 +11,12 @@
 		83E485B32694616900AECCBA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E485B22694616900AECCBA /* ContentView.swift */; };
 		83E485B52694616A00AECCBA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83E485B42694616A00AECCBA /* Assets.xcassets */; };
 		83E485B82694616A00AECCBA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83E485B72694616A00AECCBA /* Preview Assets.xcassets */; };
+		83E485C12694634F00AECCBA /* Recorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E485C02694634F00AECCBA /* Recorder.swift */; };
+		83E485C4269463D000AECCBA /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E485C3269463D000AECCBA /* AudioRecorder.swift */; };
+		83E485C92694AC2100AECCBA /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E485C82694AC2100AECCBA /* AudioPlayer.swift */; };
+		83E485CB2694B04B00AECCBA /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E485CA2694B04B00AECCBA /* Player.swift */; };
+		83E485CF2694DD4A00AECCBA /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E485CE2694DD4A00AECCBA /* ProgressBar.swift */; };
+		83E485D12694DF5E00AECCBA /* MemoTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E485D02694DF5E00AECCBA /* MemoTimer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +26,12 @@
 		83E485B42694616A00AECCBA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		83E485B72694616A00AECCBA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		83E485B92694616A00AECCBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		83E485C02694634F00AECCBA /* Recorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recorder.swift; sourceTree = "<group>"; };
+		83E485C3269463D000AECCBA /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
+		83E485C82694AC2100AECCBA /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
+		83E485CA2694B04B00AECCBA /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		83E485CE2694DD4A00AECCBA /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
+		83E485D02694DF5E00AECCBA /* MemoTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoTimer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,7 +65,8 @@
 			isa = PBXGroup;
 			children = (
 				83E485B02694616900AECCBA /* VoiceMemoApp.swift */,
-				83E485B22694616900AECCBA /* ContentView.swift */,
+				83E485BF2694623E00AECCBA /* Views */,
+				83E485C22694639D00AECCBA /* Models */,
 				83E485B42694616A00AECCBA /* Assets.xcassets */,
 				83E485B92694616A00AECCBA /* Info.plist */,
 				83E485B62694616A00AECCBA /* Preview Content */,
@@ -67,6 +80,35 @@
 				83E485B72694616A00AECCBA /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		83E485BF2694623E00AECCBA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				83E485B22694616900AECCBA /* ContentView.swift */,
+				83E485C02694634F00AECCBA /* Recorder.swift */,
+				83E485CA2694B04B00AECCBA /* Player.swift */,
+				83E485C52694A81700AECCBA /* Helper */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		83E485C22694639D00AECCBA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				83E485C3269463D000AECCBA /* AudioRecorder.swift */,
+				83E485C82694AC2100AECCBA /* AudioPlayer.swift */,
+				83E485D02694DF5E00AECCBA /* MemoTimer.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		83E485C52694A81700AECCBA /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				83E485CE2694DD4A00AECCBA /* ProgressBar.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,8 +180,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83E485C12694634F00AECCBA /* Recorder.swift in Sources */,
 				83E485B32694616900AECCBA /* ContentView.swift in Sources */,
+				83E485D12694DF5E00AECCBA /* MemoTimer.swift in Sources */,
+				83E485C4269463D000AECCBA /* AudioRecorder.swift in Sources */,
+				83E485CF2694DD4A00AECCBA /* ProgressBar.swift in Sources */,
+				83E485CB2694B04B00AECCBA /* Player.swift in Sources */,
 				83E485B12694616900AECCBA /* VoiceMemoApp.swift in Sources */,
+				83E485C92694AC2100AECCBA /* AudioPlayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
