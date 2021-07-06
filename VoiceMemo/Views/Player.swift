@@ -70,8 +70,12 @@ struct Player: View {
                 
                 ///restart button
                 Button{
-                    audioPlayer.stopAudio()
-                    memoTimer.stopTimer()
+                    if audioPlayer.playing {
+                        audioPlayer.stopAudio()
+                    }
+                    if let _ = memoTimer.timer {
+                        memoTimer.stopTimer()
+                    }
                     
                     audioPlayer.playAudio()
                     memoTimer.totalTime = Int(audioPlayer.audioPlayer.duration)

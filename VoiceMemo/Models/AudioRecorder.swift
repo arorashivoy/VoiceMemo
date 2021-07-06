@@ -17,6 +17,7 @@ class AudioRecorder: ObservableObject {
     
     @Published var recorderTime: TimeInterval = 0
     
+    var recordingStarted: Bool = false
     var recording = false {
         didSet {
             objectWillChange.send(self)

@@ -50,6 +50,8 @@ struct Recorder: View {
                         }else {
                             audioRecorder.startRecording()
                             memoTimer.startTimer()
+                            
+                            audioRecorder.recordingStarted = true
                         }
                         audioRecorder.recording = true
                     }
@@ -59,8 +61,12 @@ struct Recorder: View {
                 ///Stop
                 Button{
                     playerActive = true
-                    audioRecorder.stopRecording()
-                    memoTimer.stopTimer()
+                    if audioRecorder.recordingStarted {
+                        audioRecorder.stopRecording()
+                    }
+                    if let _ = memoTimer.timer {
+                        memoTimer.stopTimer()
+                    }
                     
                 }label: {
                     Image(systemName: "stop.fill")
@@ -74,7 +80,9 @@ struct Recorder: View {
             ///Navigating to the player
             Button{
                 playerActive.toggle()
-                audioRecorder.stopRecording()
+                if audioRecorder.recordingStarted {
+                    audioRecorder.stopRecording()
+                }
             }label: {
                 Text("Player")
                     .font(.title2)
@@ -90,7 +98,12 @@ struct Recorder: View {
             ///Recording  Button
             Button{
                 audioRecorder.startRecording()
-                memoTimer.stopTimer()
+                audioRecorder.recordingStarted = true
+                
+                if let _ = memoTimer.timer {
+                    memoTimer.stopTimer()
+                }
+                
                 memoTimer.startTimer()
             }label: {
                 Image(systemName: (audioRecorder.recording || audioRecorder.recorderTime != 0) ? "circle.dashed.inset.fill":"record.circle")
