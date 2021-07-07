@@ -19,7 +19,7 @@ class AudioPlayer: ObservableObject {
     
     /// for audio visualizer
     private var timer: Timer?
-    private let numberOfSamples: Int = 20
+    private let numberOfSamples: Int = 50
     @Published var soundSamples = [Float](repeating: .zero, count: 20)
     
     var playing = false {
@@ -63,7 +63,7 @@ class AudioPlayer: ObservableObject {
         }
         
         ///audio visualizer start
-        timer = Timer.scheduledTimer(withTimeInterval: 0.09, repeats: true){ [self] timer in
+        timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true){ [self] timer in
             audioPlayer.updateMeters()
             soundSamples.remove(at: 0)
             soundSamples.append(audioPlayer.averagePower(forChannel: 0))

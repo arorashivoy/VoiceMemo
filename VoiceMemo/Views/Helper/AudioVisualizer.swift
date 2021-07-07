@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-let numberOfSamples: Int = 20
+let numberOfSamples: Int = 50
 
 struct BarView: View {
     var value: CGFloat
