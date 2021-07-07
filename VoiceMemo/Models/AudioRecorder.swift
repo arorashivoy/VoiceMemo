@@ -19,7 +19,6 @@ class AudioRecorder: ObservableObject {
     
     /// for audio visualizer
     private var timer: Timer?
-    private var currentSample: Int = 0
     private let numberOfSamples: Int = 20
     @Published var soundSamples = [Float](repeating: .zero, count: 20)
     
@@ -68,10 +67,10 @@ class AudioRecorder: ObservableObject {
             recording = true
             
             ///audio visualizer start
-            timer = Timer.scheduledTimer(withTimeInterval: 0.005, repeats: true, block: { (timer) in
+            timer = Timer.scheduledTimer(withTimeInterval: 0.09, repeats: true, block: { (timer) in
                 self.audioRecorder.updateMeters()
-                self.soundSamples[self.currentSample] = self.audioRecorder.averagePower(forChannel: 0)
-                self.currentSample = (self.currentSample + 1) % self.numberOfSamples
+                self.soundSamples.remove(at: 0)
+                self.soundSamples.append(self.audioRecorder.averagePower(forChannel: 0))
             })
         } catch{
             print("Couldn't start recording")

@@ -16,7 +16,7 @@ struct BarView: View {
             ZStack {
                 RoundedRectangle(cornerRadius: 20.0)
                     .fill(LinearGradient(gradient: Gradient(colors: [Color.red, Color.blue]), startPoint: .top, endPoint: .bottom))
-                    .frame(height: min(value, geometry.size.height))
+                    .frame(height: value)
             }
         }
     }
@@ -36,7 +36,7 @@ struct AudioVisualizer: View {
             HStack(spacing: 4){
                 ForEach(soundSamples, id: \.self) {level in
                     BarView(value: self.normalizeSoundLevel(level: level))
-                        .animation(.easeInOut(duration: 0.03))
+                        .transition(.identity)
                     
                 }
             }
