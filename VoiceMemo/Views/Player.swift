@@ -31,9 +31,9 @@ struct Player: View {
                 Rectangle()
                     .frame(width:325, height: 270, alignment: .center)
                     .opacity(0)
-                Text("Audio Visualizer")
-                    .padding(.vertical, 125)
-                    .padding(.horizontal, 100)
+                AudioVisualizer(soundSamples: $audioPlayer.soundSamples)
+                    .frame(width:325, height: 270, alignment: .center)
+                
                 Image(systemName: audioPlayer.playing ? "speaker.wave.2.fill":"speaker.slash.fill")
             }
             
@@ -45,9 +45,7 @@ struct Player: View {
                 Button{
                     ///pause
                     if audioPlayer.playing {
-                        audioPlayer.audioPlayer.pause()
-                        audioPlayer.playerTime = audioPlayer.audioPlayer.currentTime
-                        audioPlayer.playing = false
+                        audioPlayer.pauseAudio()
                         memoTimer.stopTimer()
                     }
                     ///play

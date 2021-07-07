@@ -32,9 +32,6 @@ class MemoTimer: ObservableObject {
     func stopTimer() {
         self.timer?.invalidate()
         self.timer = nil
-        
-//        secElapsed = 0
-//        totalTime = 300
-//        startingTime = 0
+
     }
 }

@@ -15,7 +15,13 @@ class AudioPlayer: ObservableObject {
     
     var audioPlayer: AVAudioPlayer!
     
-    var playerTime: TimeInterval = 0
+    @Published var playerTime: TimeInterval = 0
+    
+    /// for audio visualizer
+    private var timer: Timer?
+    private var currentSample: Int = 0
+    private let numberOfSamples: Int = 20
+    @Published var soundSamples = [Float](repeating: .zero, count: 20)
     
     var playing = false {
         didSet {
@@ -47,6 +53,7 @@ class AudioPlayer: ObservableObject {
         
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: audioFileName)
+            audioPlayer.isMeteringEnabled = true
             audioPlayer.play()
             
             playing = true
@@ -55,12 +62,35 @@ class AudioPlayer: ObservableObject {
         }catch {
             print("Couldn't load player ")
         }
+        
+        ///audio visualizer start
+        timer = Timer.scheduledTimer(withTimeInterval: 0.005, repeats: true){ [self] timer in
+            audioPlayer.updateMeters()
+            soundSamples[currentSample] = audioPlayer.averagePower(forChannel: 0)
+            currentSample = (currentSample + 1) % numberOfSamples
+            
+        }
     }
     
     func stopAudio() {
         audioPlayer.stop()
         
+        self.timer?.invalidate()
+        self.timer = nil
+        
         playing = false
         playerTime = 0
+    }
+    
+    func pauseAudio(){
+        audioPlayer.pause()
+        
+//        soundSamples = [Float](repeating: .zero, count: numberOfSamples)
+        
+        self.timer?.invalidate()
+        self.timer = nil
+        
+        playing = false
+        playerTime = audioPlayer.currentTime
     }
 }

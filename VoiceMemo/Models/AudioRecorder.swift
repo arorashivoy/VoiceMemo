@@ -17,6 +17,12 @@ class AudioRecorder: ObservableObject {
     
     @Published var recorderTime: TimeInterval = 0
     
+    /// for audio visualizer
+    private var timer: Timer?
+    private var currentSample: Int = 0
+    private let numberOfSamples: Int = 20
+    @Published var soundSamples = [Float](repeating: .zero, count: 20)
+    
     var recordingStarted: Bool = false
     var recording = false {
         didSet {
@@ -46,19 +52,27 @@ class AudioRecorder: ObservableObject {
         let audioFileName = documentsFolder.appendingPathComponent("RecordedFile.m4a")
         
         let settings = [
-            AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
-            AVSampleRateKey: 12000,
+            AVFormatIDKey: Int(kAudioFormatAppleLossless),
+            AVSampleRateKey: 441000,
             AVNumberOfChannelsKey: 1,
-            AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
+            AVEncoderAudioQualityKey: AVAudioQuality.max.rawValue
         ]
         
         do{
             audioRecorder = try AVAudioRecorder(url: audioFileName, settings: settings)
             
+            audioRecorder.isMeteringEnabled = true
             audioRecorder.record(forDuration: 300)
             
             recorderTime = 0
             recording = true
+            
+            ///audio visualizer start
+            timer = Timer.scheduledTimer(withTimeInterval: 0.005, repeats: true, block: { (timer) in
+                self.audioRecorder.updateMeters()
+                self.soundSamples[self.currentSample] = self.audioRecorder.averagePower(forChannel: 0)
+                self.currentSample = (self.currentSample + 1) % self.numberOfSamples
+            })
         } catch{
             print("Couldn't start recording")
         }
@@ -67,7 +81,21 @@ class AudioRecorder: ObservableObject {
     func stopRecording() {
         audioRecorder.stop()
         
+        self.timer?.invalidate()
+        self.timer = nil
+        
         recording = false
         recorderTime = 0
+    }
+    
+    func pauseRecording() {
+        audioRecorder.pause()
+        soundSamples = [Float](repeating: .zero, count: numberOfSamples)
+        
+        self.timer?.invalidate()
+        self.timer = nil
+        
+        recording = false
+        recorderTime = audioRecorder.currentTime
     }
 }

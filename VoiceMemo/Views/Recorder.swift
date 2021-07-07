@@ -20,9 +20,9 @@ struct Recorder: View {
                 Rectangle()
                     .frame(width:325, height: 270, alignment: .center)
                     .opacity(0)
-                Text("Audio Visiualizer")
-                    .padding(.vertical, 125)
-                    .padding(.horizontal, 100)
+                AudioVisualizer(soundSamples: $audioRecorder.soundSamples)
+                    .frame(width:325, height: 270)
+                
                 Image(systemName: audioRecorder.recording ? "mic.fill":"mic.slash")
             }
             
@@ -34,9 +34,7 @@ struct Recorder: View {
                 Button{
                     ///Pause
                     if audioRecorder.recording {
-                        audioRecorder.audioRecorder.pause()
-                        audioRecorder.recorderTime = audioRecorder.audioRecorder.currentTime
-                        audioRecorder.recording = false
+                        audioRecorder.pauseRecording()
                         memoTimer.stopTimer()
                     }
                     ///Play
