@@ -55,7 +55,7 @@ struct Player: View {
                             memoTimer.totalTime = Int(audioPlayer.audioPlayer.duration)
                             memoTimer.startTimer()
                         }else {
-                            audioPlayer.audioPlayer.play()
+                            audioPlayer.resumeAudio()
                             memoTimer.startingTime = Int(audioPlayer.playerTime)
                             memoTimer.totalTime = Int(audioPlayer.audioPlayer.duration)
                             memoTimer.startTimer()

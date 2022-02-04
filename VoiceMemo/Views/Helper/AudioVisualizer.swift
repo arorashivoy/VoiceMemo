@@ -36,7 +36,7 @@ struct AudioVisualizer: View {
             HStack(spacing: 4){
                 ForEach(soundSamples, id: \.self) {level in
                     BarView(value: self.normalizeSoundLevel(level: level))
-                        .transition(.identity)
+                        .transition(.slide)
                     
                 }
             }

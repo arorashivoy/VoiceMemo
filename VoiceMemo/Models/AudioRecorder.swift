@@ -67,7 +67,7 @@ class AudioRecorder: ObservableObject {
             recording = true
             
             ///audio visualizer start
-            timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { (timer) in
+            timer = Timer.scheduledTimer(withTimeInterval: 0.15, repeats: true, block: { (timer) in
                 self.audioRecorder.updateMeters()
                 self.soundSamples.remove(at: 0)
                 self.soundSamples.append(self.audioRecorder.averagePower(forChannel: 0))
@@ -89,12 +89,23 @@ class AudioRecorder: ObservableObject {
     
     func pauseRecording() {
         audioRecorder.pause()
-        soundSamples = [Float](repeating: .zero, count: numberOfSamples)
+//        soundSamples = [Float](repeating: .zero, count: numberOfSamples)
         
         self.timer?.invalidate()
         self.timer = nil
         
         recording = false
         recorderTime = audioRecorder.currentTime
+    }
+    
+    func resumeRecording() {
+        audioRecorder.record()
+        
+        ///audio visualizer resume
+        timer = Timer.scheduledTimer(withTimeInterval: 0.15, repeats: true, block: { (timer) in
+            self.audioRecorder.updateMeters()
+            self.soundSamples.remove(at: 0)
+            self.soundSamples.append(self.audioRecorder.averagePower(forChannel: 0))
+        })
     }
 }

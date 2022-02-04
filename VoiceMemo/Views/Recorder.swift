@@ -40,7 +40,7 @@ struct Recorder: View {
                     ///Play
                     else {
                         if audioRecorder.recorderTime != 0 {
-                            audioRecorder.audioRecorder.record()
+                            audioRecorder.resumeRecording()
                             memoTimer.startingTime = Int(audioRecorder.recorderTime)
                             memoTimer.totalTime = 300
                             memoTimer.startTimer()
